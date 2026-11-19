@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission: Save The Cleanliness World! — 22nd Century Gadget Edition</title>
+    <!-- Tailwind CSS untuk susun atur responsif -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Fredoka & Nunito -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Tetapan Asas & Tema Doraemon + Teknologi Abad ke-22 */
+        :root {
+            --dora-blue: #0093E9;
+            --dora-dark-blue: #005b96;
+            --gadget-red: #E60012;
+            --bell-gold: #FFD700;
+            --pink-door: #FF69B4;
+            --pink-dark: #D81B60;
+            --cyber-cyan: #00F0FF;
+        }
+
+        * {
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Nunito', sans-serif;
+            background: radial-gradient(circle at 50% 20%, #0077c8 0%, #022c54 65%, #01162b 100%);
+            color: #ffffff;
+        }
+
+        h1, h2, h3, .font-title {
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        /* Kanvas Terowong Mesin Masa (Time Machine Vortex Tunnel) */
+        #time-tunnel-canvas {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            display: block;
+        }
+
+        /* Panel HUD Masa Depan Berkaca (High-Contrast Glassmorphism) */
+        .hud-panel {
+            background: rgba(5, 22, 52, 0.84);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 2px solid rgba(0, 240, 255, 0.65);
+            box-shadow: 0 8px 32px rgba(2, 12, 36, 0.75), inset 0 0 14px rgba(0, 240, 255, 0.2);
+        }
+
+        /* Pintu Ke Mana Saja (Anywhere Door) Futuristik */
+        .anywhere-door-frame {
+            position: relative;
+            width: 130px;
+            height: 175px;
+            background: linear-gradient(180deg, #ff7eb9 0%, #ff4791 100%);
+            border: 5px solid #ff9ec7;
+            border-bottom: 8px solid #d81b60;
+            border-radius: 14px 14px 4px 4px;
+            box-shadow: 0 0 25px rgba(255, 105, 180, 0.55), inset 0 0 10px rgba(255, 255, 255, 0.4);
+            perspective: 700px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 768px) {
+            .anywhere-door-frame {
+                width: 155px;
+                height: 205px;
+            }
+        }
+
+        /* Portal Dimensi di Sebalik Pintu */
+        .dimension-portal {
+            position: absolute;
+            inset: 4px;
+            border-radius: 8px;
+            background: radial-gradient(circle, #ffffff 0%, #00f0ff 40%, #0093e9 80%, #ff69b4 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .portal-swirl {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: repeating-conic-gradient(from 0deg, rgba(255,255,255,0.25) 0deg 15deg, transparent 15deg 30deg);
+            animation: spinSlow 8s linear infinite;
+        }
+
+        /* Daun Pintu Pink Ke Mana Saja (Berengsel Kiri) */
+        .anywhere-door-leaf {
+            position: absolute;
+            inset: 2px;
+            background: linear-gradient(135deg, #ff69b4 0%, #e91e63 100%);
+            border: 2px solid #ffc1e3;
+            border-radius: 8px;
+            transform-origin: left center;
+            transition: transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 10px 8px;
+            box-shadow: inset 0 0 12px rgba(255, 255, 255, 0.35);
+        }
+
+        /* Corak Panel Pintu */
+        .door-window-panel {
+            width: 100%;
+            height: 42%;
+            border: 2px solid rgba(255, 255, 255, 0.55);
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.12);
+            position: relative;
+        }
+
+        /* Tombol Pintu Emas & Litar Cyber */
+        .door-knob {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #fff59d, #ffd700 60%, #b8860b 100%);
+            border: 1.5px solid #ffffff;
+            box-shadow: 0 0 8px #ffd700;
+        }
+
+        /* Keadaan Pintu Terbuka */
+        .anywhere-door-frame.open .anywhere-door-leaf {
+            transform: rotateY(-115deg);
+        }
+
+        .anywhere-door-frame.open {
+            box-shadow: 0 0 35px #00f0ff, 0 0 50px #ff69b4;
+            border-color: #00f0ff;
+        }
+
+        /* Zon Pengimbas Poket 4D (Drag & Drop) */
+        .pocket-4d-zone {
+            background: linear-gradient(180deg, #ffffff 0%, #e0f7fa 100%);
+            border: 4px dashed #0093E9;
+            border-radius: 16px 16px 90px 90px;
+            color: #01162b;
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 20px rgba(0, 240, 255, 0.25), inset 0 -6px 14px rgba(0, 147, 233, 0.2);
+        }
+
+        .pocket-4d-zone.drag-over {
+            transform: scale(1.03);
+            border-style: solid;
+            border-color: #FF69B4;
+            background: linear-gradient(180deg, #fff0f7 0%, #b2ebf2 100%);
+            box-shadow: 0 0 28px rgba(255, 105, 180, 0.7);
+        }
+
+        /* Kad Objek Gadget Boleh Seret / Ketik */
+        .gadget-item {
+            touch-action: manipulation;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+        .gadget-item:active {
+            transform: scale(0.95);
+        }
+
+        /* Butang Gaya Gajet 3D */
+        .btn-gadget {
+            transition: all 0.15s ease;
+            box-shadow: 0 5px 0 rgba(1, 22, 43, 0.55);
+        }
+        .btn-gadget:active:not(:disabled) {
+            transform: translateY(4px);
+            box-shadow: 0 1px 0 rgba(1, 22, 43, 0.55);
+        }
+
+        /* Animasi Khas */
+        @keyframes spinSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        @keyframes floatMascot {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+        }
+        .animate-mascot {
+            animation: floatMascot 2.8s ease-in-out infinite;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-6px); }
+            40%, 80% { transform: translateX(6px); }
+        }
+        .animate-shake {
+            animation: shake 0.4s ease-in-out;
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.85); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .animate-pop {
+            animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+    </style>
+</head>
+<body class="relative flex flex-col justify-between p-2.5 sm:p-4">
+
+    <!-- Kanvas Animasi Terowong Mesin Masa Gaya Doraemon -->
+    <canvas id="time-tunnel-canvas"></canvas>
+
+    <!-- ================= SKRIN 1: MULA MISI ================= -->
+    <section id="screen-start" class="relative z-10 w-full h-full flex flex-col items-center justify-center text-center max-w-2xl mx-auto px-3">
+        <div class="hud-panel rounded-3xl p-5 sm:p-7 w-full animate-pop relative overflow-hidden">
+            <!-- Jalur Hiasan Merah & Loceng Emas Atas -->
+            <div class="w-full h-2 bg-gradient-to-r from-[#0093E9] via-[#E60012] to-[#FFD700] rounded-full mb-4"></div>
+
+            <!-- Maskot Robot Kucing Pembersih (SVG Tersuai Inspirasi Gambar) -->
+            <div class="w-32 h-32 sm:w-36 sm:h-36 mx-auto mb-2 animate-mascot" id="start-mascot-slot">
+                <!-- Diisi oleh JS SVG -->
+            </div>
+
+            <div class="inline-flex items-center gap-1.5 bg-[#FF69B4]/25 border border-[#FF69B4] text-pink-200 text-xs font-bold px-3.5 py-1 rounded-full mb-2 tracking-wider uppercase">
+                <span>🔔</span> 22nd Century Gadget Edition
+            </div>
+
+            <h1 class="text-2xl sm:text-4xl font-bold text-white drop-shadow-[0_2px_10px_rgba(0,240,255,0.6)] leading-tight mb-2">
+                MISSION: SAVE THE <span class="text-[#FFD700]">CLEANLINESS</span> WORLD!
+            </h1>
+
+            <p class="text-cyan-100 text-xs sm:text-sm md:text-base leading-relaxed mb-5 max-w-lg mx-auto">
+                Alamak! Dunia Kebersihan sedang dilanda kekotoran! 🧹<br>
+                Bantu <span class="text-[#FFD700] font-bold">Robot Kucing Pembersih</span> mengaktifkan <span class="text-[#FF69B4] font-bold">Pintu Ke Mana Saja</span> berteknologi tinggi dengan menyelesaikan <span class="text-cyan-300 font-bold">5 Misi Syarat Istinjak</span>!
+            </p>
+
+            <!-- Ringkasan Gajet Misi -->
+            <div class="grid grid-cols-3 gap-2 text-xs bg-[#01162b]/75 p-3 rounded-2xl border border-cyan-400/30 mb-5">
+                <div class="flex flex-col items-center">
+                    <span class="text-xl mb-0.5">🚪</span>
+                    <span class="text-pink-300 font-bold">Pintu Ke Mana Saja</span>
+                </div>
+                <div class="flex flex-col items-center border-x border-cyan-400/25">
+                    <span class="text-xl mb-0.5">🎒</span>
+                    <span class="text-cyan-300 font-bold">Pengimbas Poket 4D</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-xl mb-0.5">🏅</span>
+                    <span class="text-yellow-300 font-bold">Ejen Abad ke-22</span>
+                </div>
+            </div>
+
+            <button onclick="startGame()" class="btn-gadget bg-gradient-to-r from-[#E60012] to-[#ff2a3c] hover:from-[#ff1a2c] hover:to-[#ff4d5c] border-2 border-[#FFD700] text-white font-title font-bold text-lg sm:text-xl px-8 py-3 rounded-2xl w-full sm:w-auto cursor-pointer tracking-wide">
+                🔔 AKTIFKAN GAJET & MULA!
+            </button>
+        </div>
+    </section>
+
+    <!-- ================= SKRIN 2: PERMAINAN UTAMA ================= -->
+    <section id="screen-game" class="hidden relative z-10 w-full h-full flex flex-col justify-between max-w-5xl mx-auto">
+        
+        <!-- Bar HUD Atas -->
+        <header class="hud-panel flex items-center justify-between rounded-2xl px-3 sm:px-5 py-2">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#FFD700] border-2 border-[#E60012] flex items-center justify-center text-base sm:text-lg shadow">
+                    🔔
+                </div>
+                <div>
+                    <p class="text-[10px] text-cyan-300 font-bold uppercase tracking-wider">Peringkat Misi</p>
+                    <p id="level-indicator" class="font-title text-sm sm:text-base font-bold text-white">Misi 1 / 5</p>
+                </div>
+            </div>
+
+            <!-- Penunjuk Kemajuan 5 Pintu -->
+            <div class="flex items-center gap-1.5 sm:gap-2" id="progress-dots"></div>
+
+            <!-- Markah & Butang Bunyi -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <div class="text-right">
+                    <p class="text-[10px] text-[#FFD700] font-bold uppercase tracking-wider">Tenaga Bersih</p>
+                    <p id="score-display" class="font-title text-sm sm:text-base font-bold text-[#FFD700]">100%</p>
+                </div>
+                <button id="mute-btn" onclick="toggleMute()" title="Tukar Bunyi" class="w-9 h-9 rounded-xl bg-cyan-950/80 border border-cyan-400/50 hover:border-cyan-300 flex items-center justify-center text-base cursor-pointer">
+                    🔊
+                </button>
+            </div>
+        </header>
+
+        <!-- Kawasan Tengah: Maskot + Pintu Ke Mana Saja (Kiri) & Interaksi Gajet (Kanan) -->
+        <main class="flex-1 flex flex-col md:flex-row items-center justify-center gap-3 sm:gap-4 my-2 overflow-y-auto px-1">
+            
+            <!-- Panel Kiri: Maskot Pembersih & Pintu Ke Mana Saja -->
+            <div class="flex flex-row md:flex-col items-center justify-center gap-3 sm:gap-4 shrink-0 bg-[#01162b]/60 border border-cyan-400/30 rounded-3xl p-3 sm:p-4">
+                
+                <!-- Maskot Robot Kucing Dinamik -->
+                <div class="flex flex-col items-center">
+                    <div id="game-mascot-slot" class="w-24 h-24 sm:w-28 sm:h-28 animate-mascot"></div>
+                    <span id="mascot-mood-tag" class="text-[11px] font-bold bg-[#FF69B4]/30 text-pink-200 border border-[#FF69B4]/60 px-2.5 py-0.5 rounded-full mt-1">
+                        Mod: Bersedia Membersih!
+                    </span>
+                </div>
+
+                <!-- Pintu Ke Mana Saja (Anywhere Door) -->
+                <div class="flex flex-col items-center">
+                    <div id="anywhere-door" class="anywhere-door-frame">
+                        <!-- Cahaya Dimensi di Dalam -->
+                        <div class="dimension-portal">
+                            <div class="portal-swirl"></div>
+                            <span class="relative z-10 text-3xl sm:text-4xl animate-bounce">✨</span>
+                            <span class="relative z-10 font-title text-[11px] font-bold text-slate-950 bg-white/95 px-2 py-0.5 rounded-full mt-1 shadow">
+                                LALUAN DIBUKA!
+                            </span>
+                        </div>
+                        <!-- Daun Pintu Pink -->
+                        <div class="anywhere-door-leaf">
+                            <div class="door-window-panel"></div>
+                            <div class="door-knob"></div>
+                            <div class="door-window-panel"></div>
+                        </div>
+                    </div>
+                    <span id="door-status-text" class="mt-2 text-[11px] font-bold uppercase tracking-wider px-3 py-0.5 rounded-full bg-rose-500/25 text-rose-200 border border-rose-400/50">
+                        Pintu Ke Mana Saja: Terkunci
+                    </span>
+                </div>
+            </div>
+
+            <!-- Panel Kanan: Paparan Soalan / Pengimbas Poket 4D -->
+            <div class="flex-1 w-full hud-panel rounded-3xl p-4 sm:p-5 flex flex-col justify-between min-h-[290px]">
+                <div>
+                    <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                        <span id="topic-badge" class="bg-[#0093E9]/40 text-cyan-200 border border-cyan-300/50 text-xs font-bold px-3 py-0.5 rounded-lg">
+                            Gajet Pengimbas Istinjak
+                        </span>
+                        <span id="instruction-hint" class="text-xs text-[#FFD700] font-bold">
+                            Pilih 1 jawapan tepat
+                        </span>
+                    </div>
+
+                    <h2 id="question-text" class="text-base sm:text-lg md:text-xl font-bold text-white leading-snug mb-3">
+                        Memuatkan data misi...
+                    </h2>
+                </div>
+
+                <!-- MOD A: Pilihan Jawapan Situasi (Peringkat 1, 3, 4, 5) -->
+                <div id="options-container" class="flex flex-col gap-2.5"></div>
+
+                <!-- MOD B: Pengimbas Poket 4D Drag & Drop / Ketik (Peringkat 2) -->
+                <div id="scanner-container" class="hidden flex-col gap-3">
+                    <!-- Senarai Objek Boleh Seret / Klik -->
+                    <div id="draggable-items-pool" class="grid grid-cols-2 sm:grid-cols-3 gap-2"></div>
+
+                    <!-- Zon Poket 4D -->
+                    <div id="pocket-4d-dropzone" class="pocket-4d-zone p-3 text-center cursor-pointer relative">
+                        <div class="flex items-center justify-center gap-2 font-title font-bold text-sm sm:text-base text-[#005b96]">
+                            <span>🎒 PENGIMBAS POKET 4D</span>
+                            <span id="scanner-counter" class="bg-[#0093E9] text-white text-xs px-2.5 py-0.5 rounded-full">0 / 3 Sah</span>
+                        </div>
+                        <p class="text-[11px] sm:text-xs text-slate-600 font-semibold mt-0.5">
+                            Seret (Drag) objek istinjak yang SAH ke sini, atau ketik objek di atas!
+                        </p>
+                        <!-- Item yang berjaya dimasukkan -->
+                        <div id="accepted-items-tray" class="flex flex-wrap items-center justify-center gap-1.5 mt-2 min-h-[28px]"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Kotak Maklum Balas Gajet -->
+        <footer id="feedback-box" class="hidden rounded-2xl p-3 sm:p-4 border-2 shadow-xl transition-all">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5">
+                <div class="flex items-start gap-2.5">
+                    <span id="feedback-icon" class="text-2xl shrink-0">💡</span>
+                    <div>
+                        <h3 id="feedback-title" class="font-title font-bold text-sm sm:text-base">Status Gajet</h3>
+                        <p id="feedback-desc" class="text-xs sm:text-sm leading-snug">Penerangan di sini.</p>
+                    </div>
+                </div>
+                <button id="next-btn" onclick="nextLevel()" class="hidden btn-gadget shrink-0 bg-gradient-to-r from-[#FF69B4] to-[#E60012] border border-white text-white font-title font-bold text-sm sm:text-base px-5 py-2 rounded-xl w-full sm:w-auto cursor-pointer">
+                    Masuk Pintu Seterusnya 🚪➡️
+                </button>
+            </div>
+        </footer>
+    </section>
+
+    <!-- ================= SKRIN 3: TAMAT MISI & LENCANA EJEN ================= -->
+    <section id="screen-end" class="hidden relative z-10 w-full h-full flex flex-col items-center justify-center text-center max-w-2xl mx-auto px-3">
+        <div class="hud-panel border-4 border-[#FFD700] rounded-3xl p-5 sm:p-7 w-full animate-pop relative overflow-hidden">
+            
+            <!-- Maskot Gembira Berkilau -->
+            <div id="victory-mascot-slot" class="w-32 h-32 sm:w-36 sm:h-36 mx-auto mb-1 animate-mascot"></div>
+
+            <div class="inline-block bg-[#FFD700]/20 border border-[#FFD700] text-[#FFD700] text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-1">
+                🏅 Sijil Penghargaan Masa Depan
+            </div>
+
+            <h1 class="text-2xl sm:text-4xl font-bold text-white mb-2">
+                EJEN KEBERSIHAN ABAD KE-22!
+            </h1>
+
+            <p class="text-cyan-100 text-xs sm:text-sm md:text-base mb-5 max-w-md mx-auto">
+                Tahniah! Semua <span class="text-[#FF69B4] font-bold">5 Pintu Ke Mana Saja</span> telah dibuka dan <span class="text-[#FFD700] font-bold">Dunia Kebersihan</span> kini kembali bersih, suci dan bercahaya!
+            </p>
+
+            <!-- Statistik Akhir -->
+            <div class="grid grid-cols-2 gap-3 bg-[#01162b]/80 border border-cyan-400/40 rounded-2xl p-3.5 mb-5 max-w-md mx-auto">
+                <div class="flex flex-col items-center border-r border-cyan-400/30">
+                    <span class="text-[11px] text-cyan-300 uppercase font-bold">Tenaga Kebersihan</span>
+                    <span id="final-score" class="font-title text-2xl sm:text-3xl font-bold text-[#FFD700]">100%</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-[11px] text-cyan-300 uppercase font-bold">Jumlah Tindakan</span>
+                    <span id="final-attempts" class="font-title text-2xl sm:text-3xl font-bold text-[#FF69B4]">7 Kali</span>
+                </div>
+            </div>
+
+            <button onclick="restartGame()" class="btn-gadget bg-gradient-to-r from-[#0093E9] to-[#005b96] hover:from-[#00a8ff] hover:to-[#0077c8] border-2 border-[#FFD700] text-white font-title font-bold text-base sm:text-lg px-8 py-3 rounded-2xl w-full sm:w-auto cursor-pointer">
+                🔄 MAIN SEMULA MISI
+            </button>
+        </div>
+    </section>
+
+    <script>
+        /**
+         * PENJANA SVG MASKOT ROBOT KUCING PEMBERSIH (INSPIRASI GAMBAR)
+         * Mempunyai 3 ekspresi dinamik: 'worried' (risau/sedang membersih), 'happy' (gembira/berkilau), 'shocked' (terkejut/salah)
+         */
+        function getMascotSVG(mood = 'worried') {
+            // Ekspresi Mata & Mulut mengikut keadaan
+            let eyesSVG = '';
+            let mouthSVG = '';
+            let sparklesSVG = '';
+
+            if (mood === 'worried') {
+                // Mata risau + kening berkerut seperti gambar rujukan
+                eyesSVG = `
+                    <ellipse cx="88" cy="72" rx="13" ry="17" fill="#FFFFFF" stroke="#1E293B" stroke-width="2.5"/>
+                    <ellipse cx="112" cy="72" rx="13" ry="17" fill="#FFFFFF" stroke="#1E293B" stroke-width="2.5"/>
+                    <circle cx="91" cy="74" r="4.5" fill="#0F172A"/>
+                    <circle cx="92.5" cy="72.5" r="1.5" fill="#FFFFFF"/>
+                    <circle cx="109" cy="74" r="4.5" fill="#0F172A"/>
+                    <circle cx="110.5" cy="72.5" r="1.5" fill="#FFFFFF"/>
+                    <!-- Kening risau -->
+                    <path d="M78 60 Q88 55 95 62" fill="none" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M105 62 Q112 55 122 60" fill="none" stroke="#1E293B" stroke-width="2.5" stroke-linecap="round"/>
+                    <!-- Titisan peluh kecil -->
+                    <path d="M133 66 Q137 73 133 77 Q129 73 133 66 Z" fill="#38BDF8" stroke="#0284C7" stroke-width="1"/>
+                `;
+                // Mulut risau beralun seperti gambar
+                mouthSVG = `
+                    <path d="M76 112 Q100 101 122 111" fill="none" stroke="#1E293B" stroke-width="2.8" stroke-linecap="round"/>
+                `;
+            } else if (mood === 'happy') {
+                // Mata melengkung gembira + bintang berkilau
+                eyesSVG = `
+                    <ellipse cx="88" cy="72" rx="13" ry="17" fill="#FFFFFF" stroke="#1E293B" stroke-width="2.5"/>
+                    <ellipse cx="112" cy="72" rx="13" ry="17" fill="#FFFFFF" stroke="#1E293B" stroke-width="2.5"/>
+                    <path d="M81 74 Q88 64 95 74" fill="none" stroke="#0F172A" stroke-width="3.5" stroke-linecap="round"/>
+                    <path d="M105 74 Q112 64 119 74" fill="none" stroke="#0F172A" stroke-width="3.5" stroke-linecap="round"/>
+                `;
+                // Senyuman lebar ceria
+                mouthSVG = `
+                    <path d="M74 103 Q100 128 126 103 Z" fill="#E60012" stroke="#1E293B" stroke-width="2.5" stroke-linejoin="round"/>
+                    <path d="M84 113 Q100 107 116 113 Q100 123 84 113 Z" fill="#FF8DA1"/>
+                `;
+                sparklesSVG = `
+                    <text x="22" y="45" font-size="22">✨</text>
+                    <text x="155" y="42" font-size="22">🌟</text>
+                `;
+            } else {
+                // Terkejut (Salah jawapan)
+                eyesSVG = `
+                    <ellipse cx="88" cy="72" rx="14" ry="18" fill="#FFFFFF" stroke="#1E293B" stroke-width="2.5"/>
+                    <ellipse cx="112" cy="72" rx="14" ry="18" fill="#FFFFFF" stroke="#1E293B" stroke-width="2.5"/>
+                    <circle cx="88" cy="72" r="3" fill="#0F172A"/>
+                    <circle cx="112" cy="72" r="3" fill="#0F172A"/>
+                `;
+                mouthSVG = `
+                    <ellipse cx="100" cy="110" rx="10" ry="8" fill="#E60012" stroke="#1E293B" stroke-width="2.5"/>
+                `;
+            }
+
+            return `
+            <svg viewBox="0 0 200 210" class="w-full h-full drop-shadow-[0_6px_12px_rgba(0,0,0,0.45)]" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <!-- Corak Polkadot Merah Jambu untuk Skaf Kepala -->
+                    <pattern id="pinkPolka" x="0" y="0" width="22" height="22" patternUnits="userSpaceOnUse">
+                        <rect width="22" height="22" fill="#FF9ECE"/>
+                        <circle cx="7" cy="7" r="4.5" fill="#E91E63"/>
+                        <circle cx="18" cy="17" r="4" fill="#E91E63"/>
+                    </pattern>
+                </defs>
+
+                ${sparklesSVG}
+
+                <!-- Batang Mop Pembersih di Tangan Kiri (Belakang/Sisi) -->
+                <g transform="rotate(-24 55 150)">
+                    <!-- Batang Kayu/Aloi -->
+                    <rect x="20" y="138" width="88" height="7" rx="3.5" fill="#D9A05B" stroke="#1E293B" stroke-width="2"/>
+                    <line x1="45" y1="138" x2="45" y2="145" stroke="#1E293B" stroke-width="2"/>
+                    <line x1="72" y1="138" x2="72" y2="145" stroke="#1E293B" stroke-width="2"/>
+                    <!-- Kepala Mop Oren -->
+                    <path d="M88 135 L118 124 L125 158 L88 148 Z" fill="#F97316" stroke="#1E293B" stroke-width="2.2" stroke-linejoin="round"/>
+                    <line x1="94" y1="137" x2="120" y2="132" stroke="#9A3412" stroke-width="1.8"/>
+                    <line x1="94" y1="141" x2="122" y2="141" stroke="#9A3412" stroke-width="1.8"/>
+                    <line x1="94" y1="145" x2="121" y2="150" stroke="#9A3412" stroke-width="1.8"/>
+                </g>
+
+                <!-- Simpulan Skaf Kepala di Sebelah Kiri -->
+                <path d="M54 114 L34 106 Q28 116 38 124 Z" fill="url(#pinkPolka)" stroke="#1E293B" stroke-width="2.5" stroke-linejoin="round"/>
+                <path d="M54 116 L36 128 Q42 138 52 130 Z" fill="url(#pinkPolka)" stroke="#1E293B" stroke-width="2.5" stroke-linejoin="round"/>
+
+                <!-- Badan Biru Robot Kucing -->
+                <rect x="64" y="122" width="72" height="62" rx="26" fill="#0093E9" stroke="#1E293B" stroke-width="3"/>
+                
+                <!-- Perut Putih & Poket 4D -->
+                <ellipse cx="100" cy="153" rx="27" ry="25" fill="#FFFFFF" stroke="#1E293B" stroke-width="2.2"/>
+                <path d="M81 151 L119 151 A19 18 0 0 1 81 151 Z" fill="#F8FAFC" stroke="#1E293B" stroke-width="2.2"/>
+
+                <!-- Kaki Putih -->
+                <ellipse cx="82" cy="186" rx="17" ry="10" fill="#FFFFFF" stroke="#1E293B" stroke-width="2.5"/>
+                <ellipse cx="118" cy="186" rx="17" ry="10" fill="#FFFFFF" stroke="#1E293B" stroke-width="2.5"/>
+
+                <!-- Tangan Kiri & Kanan -->
+                <circle cx="56" cy="144" r="12" fill="#FFFFFF" stroke="#1E293B" stroke-width="2.5"/>
+                <circle cx="144" cy="144" r="12" fill="#FFFFFF" stroke="#1E293B" stroke-width="2.5"/>
+
+                <!-- Kepala Biru -->
+                <circle cx="100" cy="82" r="46" fill="#0093E9" stroke="#1E293B" stroke-width="3"/>
+                
+                <!-- Muka Putih -->
+                <ellipse cx="100" cy="91" rx="39" ry="34" fill="#FFFFFF" stroke="#1E293B" stroke-width="2.2"/>
+
+                <!-- Skaf Kepala Pink Polkadot (Bandana Pembersih) -->
+                <path d="M51 86 Q48 34 100 30 Q152 34 149 86 Q142 54 100 50 Q58 54 51 86 Z" fill="url(#pinkPolka)" stroke="#1E293B" stroke-width="2.8" stroke-linejoin="round"/>
+
+                <!-- Kolar Merah & Loceng Emas -->
+                <rect x="68" y="120" width="64" height="9" rx="4.5" fill="#E60012" stroke="#1E293B" stroke-width="2.5"/>
+                <circle cx="100" cy="131" r="10" fill="#FFD700" stroke="#1E293B" stroke-width="2.5"/>
+                <line x1="91" y1="129" x2="109" y2="129" stroke="#1E293B" stroke-width="2"/>
+                <circle cx="100" cy="134" r="2.5" fill="#1E293B"/>
+
+                <!-- Mata & Kening -->
+                ${eyesSVG}
+
+                <!-- Hidung Merah & Garis Tengah -->
+                <circle cx="100" cy="89" r="6.5" fill="#E60012" stroke="#1E293B" stroke-width="2"/>
+                <circle cx="98" cy="87" r="2" fill="#FFFFFF"/>
+                <line x1="100" y1="95.5" x2="100" y2="106" stroke="#1E293B" stroke-width="2.2"/>
+
+                <!-- Misai Kucing (3 Kiri, 3 Kanan) -->
+                <line x1="64" y1="90" x2="84" y2="93" stroke="#1E293B" stroke-width="2" stroke-linecap="round"/>
+                <line x1="62" y1="98" x2="83" y2="98" stroke="#1E293B" stroke-width="2" stroke-linecap="round"/>
+                <line x1="65" y1="106" x2="84" y2="103" stroke="#1E293B" stroke-width="2" stroke-linecap="round"/>
+
+                <line x1="116" y1="93" x2="136" y2="90" stroke="#1E293B" stroke-width="2" stroke-linecap="round"/>
+                <line x1="117" y1="98" x2="138" y2="98" stroke="#1E293B" stroke-width="2" stroke-linecap="round"/>
+                <line x1="116" y1="103" x2="135" y2="106" stroke="#1E293B" stroke-width="2" stroke-linecap="round"/>
+
+                <!-- Mulut -->
+                ${mouthSVG}
+            </svg>`;
+        }
+
+        // Data 5 Peringkat Misi (Gabungan Pilihan Situasi & Drag-and-Drop Pengimbas Poket 4D)
+        const levels = [
+            {
+                type: "mcq",
+                badge: "Peringkat 1: Syarat Benda Kesat",
+                hint: "Pilih 1 situasi yang SAH",
+                question: "Pintu 1: Bekalan air terputus di makmal masa depan! Robot Kucing mahu beristinjak menggunakan benda kesat. Situasi manakah yang MEMENUHI syarat?",
+                options: [
+                    {
+                        text: "🪨 Menggunakan batu yang kering, suci dan kesat untuk menanggalkan najis",
+                        isCorrect: true,
+                        feedback: "Tepat sekali! Alat istinjak selain air mestilah suci, kering, kesat dan mampu menanggalkan najis."
+                    },
+                    {
+                        text: "🪟 Menggunakan kepingan cermin kaca yang sangat licin dan berkilat",
+                        isCorrect: false,
+                        feedback: "Kurang tepat! Permukaan licin seperti kaca tidak dapat menanggalkan najis. Alat istinjak wajib bersifat kesat."
+                    },
+                    {
+                        text: "🧻 Menggunakan tisu basah yang telah terkena kotoran najis",
+                        isCorrect: false,
+                        feedback: "Tidak sah! Alat istinjak mestilah suci dan kering. Benda yang bernajis tidak boleh menyucikan najis."
+                    }
+                ]
+            },
+            {
+                type: "scanner",
+                badge: "Peringkat 2: Pengimbas Poket 4D",
+                hint: "Seret / Ketik 3 objek SAH ke Poket 4D",
+                question: "Pintu 2: Aktifkan Pengimbas Poket 4D! Masukkan 3 objek yang SAH digunakan untuk beristinjak dan elakkan benda yang dilarang/dihormati:",
+                targetCount: 3,
+                items: [
+                    { id: "batu", label: "🪨 Batu Kesat & Kering", valid: true, reason: "Sah! Batu kering & kesat adalah alat istinjak yang utama selepas air." },
+                    { id: "tulang", label: "🦴 Tulang Haiwan", valid: false, reason: "Dilarang! Tulang adalah makanan jin dan termasuk benda yang tidak boleh digunakan untuk beristinjak." },
+                    { id: "tisu", label: "🧻 Tisu Kering & Suci", valid: true, reason: "Sah! Tisu kering yang suci dan kesat boleh menanggalkan najis dengan baik." },
+                    { id: "kertas_ilmu", label: "📖 Kertas Bertulis Ilmu", valid: false, reason: "Dilarang keras! Kertas yang mempunyai tulisan ayat Al-Quran atau ilmu adalah benda yang dihormati." },
+                    { id: "daun", label: "🍂 Daun Kering Gugur", valid: true, reason: "Sah! Daun kering yang suci dan kesat dibenarkan untuk beristinjak." },
+                    { id: "kaca", label: "🍷 Kaca Licin", valid: false, reason: "Tidak sah! Kaca terlalu licin dan berbahaya serta tidak mampu menanggalkan najis." }
+                ]
+            },
+            {
+                type: "mcq",
+                badge: "Peringkat 3: Keadaan & Kedudukan Najis",
+                hint: "Pilih 1 situasi yang SAH",
+                question: "Pintu 3: Bilakah najis itu MASIH SAH disucikan menggunakan batu atau tisu kering sahaja tanpa air?",
+                options: [
+                    {
+                        text: "☀️ Apabila najis sudah kering dan melekat keras pada kulit",
+                        isCorrect: false,
+                        feedback: "Salah tu! Jika najis sudah kering, benda kesat tidak lagi berkesan dan wajib disucikan dengan air mutlak."
+                    },
+                    {
+                        text: "🎯 Najis belum kering dan tidak meleleh beralih dari tempat keluarnya",
+                        isCorrect: true,
+                        feedback: "Hebat! Syarat beristinjak dengan benda kesat ialah najis belum kering dan tidak merebak ke tempat lain."
+                    },
+                    {
+                        text: "👖 Najis sudah meleleh terkena pada seluar dan paha",
+                        isCorrect: false,
+                        feedback: "Tidak sah guna batu sahaja jika najis sudah beralih tempat. Ia wajib dibasuh menggunakan air mutlak."
+                    }
+                ]
+            },
+            {
+                type: "mcq",
+                badge: "Peringkat 4: Bilangan Sapuan Batu",
+                hint: "Pilih 1 cara yang BETUL",
+                question: "Pintu 4: Ejen menggunakan batu untuk beristinjak. Bagaimanakah bilangan dan cara sapuan yang memenuhi syarat?",
+                options: [
+                    {
+                        text: "1️⃣ Cukup sekadar 1 kali sapuan sahaja walaupun masih ada kesan najis",
+                        isCorrect: false,
+                        feedback: "Belum cukup! Beristinjak dengan benda kesat memerlukan sekurang-kurangnya 3 kali sapuan sehingga bersih."
+                    },
+                    {
+                        text: "🔄 Mengulang-ulang sapuan pada bahagian batu yang sudah terkena najis",
+                        isCorrect: false,
+                        feedback: "Kurang tepat! Setiap sapuan mestilah menggunakan permukaan atau biji batu yang bersih."
+                    },
+                    {
+                        text: "✨ Sekurang-kurangnya 3 kali sapuan atau 3 biji batu hingga tempat itu bersih",
+                        isCorrect: true,
+                        feedback: "Cemerlang! Sekurang-kurangnya 3 kali sapuan dengan permukaan bersih sehingga hilang kesan najis."
+                    }
+                ]
+            },
+            {
+                type: "mcq",
+                badge: "Peringkat 5: Kunci Akhir Pintu Ke Mana Saja",
+                hint: "Pilih gabungan syarat PALING TEPAT",
+                question: "Pintu 5 (Terakhir): Antara berikut, manakah gabungan peraturan istinjak yang PALING TEPAT untuk membuka kunci dunia?",
+                options: [
+                    {
+                        text: "💧 Air mutlak menyucikan semua keadaan najis; benda kesat hanya sah jika najis belum kering & tidak beralih",
+                        isCorrect: true,
+                        feedback: "Sempurna! Air mutlak adalah alat istinjak paling utama, manakala benda kesat mempunyai syarat ketat seperti najis belum kering."
+                    },
+                    {
+                        text: "🥤 Boleh beristinjak menggunakan air sirap atau air kopi asalkan banyak",
+                        isCorrect: false,
+                        feedback: "Salah! Beristinjak menggunakan air wajib memakai Air Mutlak (air suci lagi menyucikan), bukan air berperisa."
+                    },
+                    {
+                        text: "🍞 Boleh menggunakan roti keras untuk beristinjak jika tiada tisu",
+                        isCorrect: false,
+                        feedback: "Dilarang! Makanan seperti roti adalah benda yang dihormati dan haram digunakan untuk beristinjak."
+                    }
+                ]
+            }
+        ];
+
+        // Pemboleh Ubah Keadaan Permainan
+        let currentLevelIndex = 0;
+        let score = 100;
+        let totalActions = 0;
+        let levelCompleted = false;
+        let acceptedScannerCount = 0;
+        let isMuted = false;
+
+        // Rujukan Elemen DOM
+        const screenStart = document.getElementById('screen-start');
+        const screenGame = document.getElementById('screen-game');
+        const screenEnd = document.getElementById('screen-end');
+
+        const levelIndicator = document.getElementById('level-indicator');
+        const progressDots = document.getElementById('progress-dots');
+        const scoreDisplay = document.getElementById('score-display');
+        const muteBtn = document.getElementById('mute-btn');
+
+        const gameMascotSlot = document.getElementById('game-mascot-slot');
+        const mascotMoodTag = document.getElementById('mascot-mood-tag');
+        const anywhereDoor = document.getElementById('anywhere-door');
+        const doorStatusText = document.getElementById('door-status-text');
+
+        const topicBadge = document.getElementById('topic-badge');
+        const instructionHint = document.getElementById('instruction-hint');
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const scannerContainer = document.getElementById('scanner-container');
+        const draggableItemsPool = document.getElementById('draggable-items-pool');
+        const pocket4dDropzone = document.getElementById('pocket-4d-dropzone');
+        const scannerCounter = document.getElementById('scanner-counter');
+        const acceptedItemsTray = document.getElementById('accepted-items-tray');
+
+        const feedbackBox = document.getElementById('feedback-box');
+        const feedbackIcon = document.getElementById('feedback-icon');
+        const feedbackTitle = document.getElementById('feedback-title');
+        const feedbackDesc = document.getElementById('feedback-desc');
+        const nextBtn = document.getElementById('next-btn');
+
+        // Paparkan maskot awal pada skrin mula & kemenangan
+        document.getElementById('start-mascot-slot').innerHTML = getMascotSVG('worried');
+        document.getElementById('victory-mascot-slot').innerHTML = getMascotSVG('happy');
+
+        /**
+         * ENJIN ANIMASI TEROWONG MESIN MASA (TIME MACHINE VORTEX TUNNEL)
+         * Menghasilkan pusaran dimensi biru-cyan-ungu-teal, gelombang cahaya masa,
+         * dan jam-jam dinding melengkung (warped clocks) berwarna-warni melayang ke skrin.
+         */
+        const tunnelCanvas = document.getElementById('time-tunnel-canvas');
+        const tCtx = tunnelCanvas.getContext('2d');
+        let cw = 0, ch = 0, cx = 0, cy = 0, tunnelTime = 0;
+
+        const clockPalettes = [
+            { rim: '#E60012', face: '#FFFDF7', hand: '#1E293B' }, // Merah ikonik
+            { rim: '#FACC15', face: '#FEFCE8', hand: '#713F12' }, // Kuning keemasan
+            { rim: '#10B981', face: '#ECFDF5', hand: '#064E3B' }, // Hijau zamrud
+            { rim: '#38BDF8', face: '#F0F9FF', hand: '#0C4A6E' }, // Biru muda
+            { rim: '#F8FAFC', face: '#FFFFFF', hand: '#334155' }  // Putih klasik
+        ];
+
+        const floatingClocks = [];
+        const totalClocks = 28;
+
+        function createClock(initialZ) {
+            const palette = clockPalettes[Math.floor(Math.random() * clockPalettes.length)];
+            return {
+                angle: Math.random() * Math.PI * 2,
+                radiusFactor: 0.16 + Math.random() * 0.65,
+                z: initialZ !== undefined ? initialZ : Math.random(),
+                speedZ: 0.0028 + Math.random() * 0.0038,
+                spinSpeed: (Math.random() - 0.5) * 0.025,
+                selfAngle: Math.random() * Math.PI * 2,
+                warpFreq: 2 + Math.floor(Math.random() * 3),
+                warpPhase: Math.random() * Math.PI * 2,
+                baseSize: 16 + Math.random() * 16,
+                hourAngle: Math.random() * Math.PI * 2,
+                minAngle: Math.random() * Math.PI * 2,
+                palette: palette
+            };
+        }
+
+        function initTimeTunnel() {
+            cw = tunnelCanvas.width = window.innerWidth;
+            ch = tunnelCanvas.height = window.innerHeight;
+            cx = cw * 0.5;
+            cy = ch * 0.48;
+            if (floatingClocks.length === 0) {
+                for (let i = 0; i < totalClocks; i++) {
+                    floatingClocks.push(createClock(i / totalClocks));
+                }
+            }
+        }
+
+        function drawWarpedClock(c, x, y, scale, alpha) {
+            tCtx.save();
+            tCtx.translate(x, y);
+            tCtx.rotate(c.selfAngle);
+            tCtx.scale(scale, scale * (0.72 + 0.25 * Math.sin(tunnelTime * 2 + c.warpPhase)));
+            tCtx.globalAlpha = alpha;
+
+            const r = c.baseSize;
+            // Lukis bingkai jam cair/melengkung (surreal melting shape)
+            tCtx.beginPath();
+            const steps = 28;
+            for (let i = 0; i <= steps; i++) {
+                const theta = (i / steps) * Math.PI * 2;
+                const wobble = 1 + 0.24 * Math.sin(theta * c.warpFreq + tunnelTime * 3.2 + c.warpPhase)
+                                 + 0.12 * Math.cos(theta * 2 - tunnelTime * 2.1);
+                const px = Math.cos(theta) * r * wobble;
+                const py = Math.sin(theta) * r * wobble;
+                if (i === 0) tCtx.moveTo(px, py);
+                else tCtx.lineTo(px, py);
+            }
+            tCtx.closePath();
+
+            // Bingkai luar berwarna
+            tCtx.fillStyle = c.palette.rim;
+            tCtx.fill();
+            tCtx.lineWidth = 2;
+            tCtx.strokeStyle = 'rgba(15, 23, 42, 0.55)';
+            tCtx.stroke();
+
+            // Muka jam dalaman
+            tCtx.save();
+            tCtx.scale(0.76, 0.76);
+            tCtx.fillStyle = c.palette.face;
+            tCtx.fill();
+            tCtx.restore();
+
+            // Tanda nombor jam ringkas (12, 3, 6, 9)
+            tCtx.fillStyle = c.palette.hand;
+            for (let m = 0; m < 12; m++) {
+                const ma = (m / 12) * Math.PI * 2;
+                tCtx.beginPath();
+                tCtx.arc(Math.cos(ma) * r * 0.56, Math.sin(ma) * r * 0.56, m % 3 === 0 ? 1.5 : 0.8, 0, Math.PI * 2);
+                tCtx.fill();
+            }
+
+            // Jarum jam & minit
+            tCtx.strokeStyle = c.palette.hand;
+            tCtx.lineCap = 'round';
+            tCtx.lineWidth = 2.2;
+            tCtx.beginPath();
+            tCtx.moveTo(0, 0);
+            tCtx.lineTo(Math.cos(c.hourAngle + tunnelTime * 0.6) * r * 0.36, Math.sin(c.hourAngle + tunnelTime * 0.6) * r * 0.36);
+            tCtx.stroke();
+
+            tCtx.lineWidth = 1.5;
+            tCtx.beginPath();
+            tCtx.moveTo(0, 0);
+            tCtx.lineTo(Math.cos(c.minAngle + tunnelTime * 2.4) * r * 0.52, Math.sin(c.minAngle + tunnelTime * 2.4) * r * 0.52);
+            tCtx.stroke();
+
+            tCtx.restore();
+        }
+
+        function animateTimeTunnel() {
+            tunnelTime += 0.016;
+            const maxDim = Math.max(cw, ch);
+
+            // 1. Latar gradien pusat terowong ruang masa (biru-cyan-teal-ungu)
+            const bgGrad = tCtx.createRadialGradient(cx, cy, 10, cx, cy, maxDim * 0.78);
+            bgGrad.addColorStop(0, '#e0faff');
+            bgGrad.addColorStop(0.14, '#38bdf8');
+            bgGrad.addColorStop(0.38, '#0284c7');
+            bgGrad.addColorStop(0.68, '#3b2886');
+            bgGrad.addColorStop(1, '#091534');
+            tCtx.fillStyle = bgGrad;
+            tCtx.fillRect(0, 0, cw, ch);
+
+            // 2. Jalur pusaran ruang masa (vortex spiral arms)
+            tCtx.save();
+            tCtx.translate(cx, cy);
+            const arms = 14;
+            for (let i = 0; i < arms; i++) {
+                const baseA = (i / arms) * Math.PI * 2 + tunnelTime * 0.35;
+                tCtx.beginPath();
+                for (let step = 0; step <= 24; step++) {
+                    const p = step / 24;
+                    const dist = p * maxDim * 0.85;
+                    const twist = baseA + p * 2.6 + Math.sin(tunnelTime * 1.4 + p * 4) * 0.18;
+                    const x = Math.cos(twist) * dist;
+                    const y = Math.sin(twist) * dist;
+                    if (step === 0) tCtx.moveTo(x, y);
+                    else tCtx.lineTo(x, y);
+                }
+                tCtx.lineWidth = 18 + (i % 3) * 10;
+                tCtx.strokeStyle = i % 2 === 0 ? 'rgba(0, 240, 255, 0.11)' : 'rgba(168, 85, 247, 0.12)';
+                tCtx.stroke();
+            }
+            tCtx.restore();
+
+            // 3. Gelombang cahaya masa (concentric time ripple rings) bergerak ke luar
+            const ringCount = 6;
+            for (let r = 0; r < ringCount; r++) {
+                const progress = ((tunnelTime * 0.28 + r / ringCount) % 1);
+                const radius = Math.pow(progress, 1.55) * maxDim * 0.82;
+                const alpha = Math.sin(progress * Math.PI) * 0.42;
+
+                tCtx.save();
+                tCtx.translate(cx, cy);
+                tCtx.beginPath();
+                const segs = 36;
+                for (let s = 0; s <= segs; s++) {
+                    const a = (s / segs) * Math.PI * 2;
+                    const wave = 1 + 0.08 * Math.sin(a * 3 + tunnelTime * 2.5 + r);
+                    const rx = Math.cos(a) * radius * wave;
+                    const ry = Math.sin(a) * radius * 0.82 * wave;
+                    if (s === 0) tCtx.moveTo(rx, ry);
+                    else tCtx.lineTo(rx, ry);
+                }
+                tCtx.closePath();
+                tCtx.lineWidth = 3 + progress * 14;
+                tCtx.strokeStyle = `rgba(186, 243, 255, ${alpha})`;
+                tCtx.stroke();
+                tCtx.restore();
+            }
+
+            // 4. Susun & lukis jam-jam dinding melengkung dari jauh ke dekat
+            floatingClocks.sort((a, b) => a.z - b.z);
+            for (let i = 0; i < floatingClocks.length; i++) {
+                const c = floatingClocks[i];
+                c.z += c.speedZ;
+                c.angle += 0.006 + c.z * 0.012;
+                c.selfAngle += c.spinSpeed;
+
+                if (c.z >= 1.15) {
+                    floatingClocks[i] = createClock(0.02);
+                    continue;
+                }
+
+                const perspective = Math.pow(c.z, 1.45);
+                const orbitR = perspective * maxDim * (0.28 + c.radiusFactor * 0.65);
+                const px = cx + Math.cos(c.angle) * orbitR;
+                const py = cy + Math.sin(c.angle) * orbitR * 0.82;
+                const scale = 0.25 + perspective * 1.65;
+                const alpha = Math.min(1, c.z * 2.5) * (c.z > 0.95 ? (1.15 - c.z) * 5 : 1);
+
+                drawWarpedClock(c, px, py, scale, Math.max(0, alpha));
+            }
+
+            requestAnimationFrame(animateTimeTunnel);
+        }
+
+        window.addEventListener('resize', initTimeTunnel);
+        window.addEventListener('load', () => {
+            initTimeTunnel();
+            animateTimeTunnel();
+        });
+        initTimeTunnel();
+
+        // Sistem Bunyi Web Audio API (Dengan kawalan Mute)
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function toggleMute() {
+            isMuted = !isMuted;
+            muteBtn.textContent = isMuted ? '🔇' : '🔊';
+        }
+
+        function playSound(type) {
+            if (isMuted) return;
+            try {
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                const now = audioCtx.currentTime;
+                if (type === 'blip') {
+                    // Bunyi gajet Poket 4D terima item
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(600, now);
+                    osc.frequency.exponentialRampToValueAtTime(950, now + 0.15);
+                    gain.gain.setValueAtTime(0.14, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+                    osc.start(now);
+                    osc.stop(now + 0.18);
+                } else if (type === 'door_open') {
+                    // Bunyi ajaib Pintu Ke Mana Saja terbuka
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(523.25, now);
+                    osc.frequency.setValueAtTime(659.25, now + 0.1);
+                    osc.frequency.setValueAtTime(783.99, now + 0.2);
+                    osc.frequency.setValueAtTime(1046.50, now + 0.3);
+                    gain.gain.setValueAtTime(0.16, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.55);
+                    osc.start(now);
+                    osc.stop(now + 0.55);
+                } else if (type === 'wrong') {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(210, now);
+                    osc.frequency.linearRampToValueAtTime(150, now + 0.25);
+                    gain.gain.setValueAtTime(0.12, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
+                    osc.start(now);
+                    osc.stop(now + 0.28);
+                } else if (type === 'win') {
+                    osc.type = 'triangle';
+                    [523.25, 659.25, 783.99, 1046.50, 1318.51].forEach((freq, i) => {
+                        osc.frequency.setValueAtTime(freq, now + i * 0.11);
+                    });
+                    gain.gain.setValueAtTime(0.18, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.75);
+                    osc.start(now);
+                    osc.stop(now + 0.75);
+                }
+            } catch (e) {}
+        }
+
+        // Kemas kini Ekspresi Maskot
+        function setMascotMood(mood) {
+            gameMascotSlot.innerHTML = getMascotSVG(mood);
+            if (mood === 'worried') {
+                mascotMoodTag.textContent = "Mod: Risau & Membersih 🧹";
+                mascotMoodTag.className = "text-[11px] font-bold bg-[#FF69B4]/30 text-pink-200 border border-[#FF69B4]/60 px-2.5 py-0.5 rounded-full mt-1";
+            } else if (mood === 'happy') {
+                mascotMoodTag.textContent = "Mod: Berjaya & Bersih! ✨";
+                mascotMoodTag.className = "text-[11px] font-bold bg-emerald-500/30 text-emerald-200 border border-emerald-400 px-2.5 py-0.5 rounded-full mt-1";
+            } else {
+                mascotMoodTag.textContent = "Mod: Alamak! Cuba Lagi 💦";
+                mascotMoodTag.className = "text-[11px] font-bold bg-amber-500/30 text-amber-200 border border-amber-400 px-2.5 py-0.5 rounded-full mt-1";
+            }
+        }
+
+        // Mula Permainan
+        function startGame() {
+            currentLevelIndex = 0;
+            score = 100;
+            totalActions = 0;
+            screenStart.classList.add('hidden');
+            screenEnd.classList.add('hidden');
+            screenGame.classList.remove('hidden');
+            loadLevel(currentLevelIndex);
+        }
+
+        // Muat Peringkat Semasa
+        function loadLevel(index) {
+            levelCompleted = false;
+            const lvl = levels[index];
+
+            levelIndicator.textContent = `Misi ${index + 1} / ${levels.length}`;
+            scoreDisplay.textContent = `${score}%`;
+            renderProgressDots();
+
+            // Tetapkan semula Pintu Ke Mana Saja & Maskot
+            setMascotMood('worried');
+            anywhereDoor.classList.remove('open');
+            doorStatusText.textContent = 'Pintu Ke Mana Saja: Terkunci';
+            doorStatusText.className = 'mt-2 text-[11px] font-bold uppercase tracking-wider px-3 py-0.5 rounded-full bg-rose-500/25 text-rose-200 border border-rose-400/50';
+
+            feedbackBox.classList.add('hidden');
+            nextBtn.classList.add('hidden');
+
+            topicBadge.textContent = lvl.badge;
+            instructionHint.textContent = lvl.hint;
+            questionText.textContent = lvl.question;
+
+            if (lvl.type === 'mcq') {
+                optionsContainer.classList.remove('hidden');
+                scannerContainer.classList.add('hidden');
+                renderMCQ(lvl);
+            } else if (lvl.type === 'scanner') {
+                optionsContainer.classList.add('hidden');
+                scannerContainer.classList.remove('hidden');
+                scannerContainer.classList.add('flex');
+                renderScanner(lvl);
+            }
+        }
+
+        // Lukis Penunjuk Kemajuan
+        function renderProgressDots() {
+            progressDots.innerHTML = '';
+            for (let i = 0; i < levels.length; i++) {
+                const dot = document.createElement('div');
+                if (i < currentLevelIndex) {
+                    dot.className = 'w-5 h-2.5 sm:w-7 sm:h-3 rounded-full bg-[#FF69B4] shadow-[0_0_8px_#FF69B4]';
+                } else if (i === currentLevelIndex) {
+                    dot.className = 'w-5 h-2.5 sm:w-7 sm:h-3 rounded-full bg-[#FFD700] animate-pulse';
+                } else {
+                    dot.className = 'w-5 h-2.5 sm:w-7 sm:h-3 rounded-full bg-cyan-950 border border-cyan-500/40';
+                }
+                progressDots.appendChild(dot);
+            }
+        }
+
+        // Render Pilihan Jawapan (MCQ)
+        function renderMCQ(lvl) {
+            optionsContainer.innerHTML = '';
+            lvl.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'btn-gadget w-full text-left bg-[#003b73]/90 hover:bg-[#00509d] border-2 border-cyan-400/50 hover:border-[#FFD700] text-white font-semibold text-xs sm:text-sm md:text-base p-3 rounded-2xl transition-colors cursor-pointer flex items-center justify-between gap-2';
+                btn.innerHTML = `
+                    <span>${opt.text}</span>
+                    <span class="status-icon text-base shrink-0"></span>
+                `;
+                btn.onclick = () => handleMCQAnswer(opt, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function handleMCQAnswer(opt, btn) {
+            if (levelCompleted) return;
+            totalActions++;
+            showFeedbackContainer();
+
+            if (opt.isCorrect) {
+                btn.className = 'btn-gadget w-full text-left bg-emerald-600 border-2 border-[#FFD700] text-white font-bold text-xs sm:text-sm md:text-base p-3 rounded-2xl flex items-center justify-between gap-2';
+                btn.querySelector('.status-icon').textContent = '✅';
+                Array.from(optionsContainer.children).forEach(b => {
+                    b.disabled = true;
+                    if (b !== btn) b.classList.add('opacity-50');
+                });
+                unlockAnywhereDoor(opt.feedback);
+            } else {
+                playSound('wrong');
+                setMascotMood('shocked');
+                deductScore();
+                btn.disabled = true;
+                btn.className = 'w-full text-left bg-rose-950/90 border-2 border-rose-500 text-rose-200 font-semibold text-xs sm:text-sm md:text-base p-3 rounded-2xl opacity-75 flex items-center justify-between gap-2 cursor-not-allowed';
+                btn.querySelector('.status-icon').textContent = '❌';
+                showErrorFeedback(opt.feedback);
+            }
+        }
+
+        // Render Gajet Pengimbas Poket 4D (Drag & Drop + Ketik untuk Mesra Skrin Sentuh/Chromebook)
+        let currentDraggedItem = null;
+        function renderScanner(lvl) {
+            acceptedScannerCount = 0;
+            scannerCounter.textContent = `0 / ${lvl.targetCount} Sah`;
+            acceptedItemsTray.innerHTML = '';
+            draggableItemsPool.innerHTML = '';
+
+            lvl.items.forEach(item => {
+                const card = document.createElement('button');
+                card.type = 'button';
+                card.draggable = true;
+                card.id = `item-${item.id}`;
+                card.className = 'gadget-item btn-gadget bg-[#004481] hover:bg-[#0059a8] border-2 border-cyan-300/60 hover:border-[#FFD700] text-white font-bold text-xs sm:text-sm p-2.5 rounded-xl cursor-grab active:cursor-grabbing flex items-center justify-center text-center shadow';
+                card.textContent = item.label;
+
+                // Sokongan Drag (Desktop / Tetikus)
+                card.addEventListener('dragstart', (e) => {
+                    currentDraggedItem = item;
+                    e.dataTransfer.setData('text/plain', item.id);
+                });
+
+                // Sokongan Ketik / Tap (Telefon, Tablet & Chromebook)
+                card.addEventListener('click', () => {
+                    if (!card.disabled && !levelCompleted) {
+                        processScannerItem(item, card);
+                    }
+                });
+
+                draggableItemsPool.appendChild(card);
+            });
+
+            // Tetapan Zon Lepas (Dropzone Poket 4D)
+            pocket4dDropzone.ondragover = (e) => {
+                e.preventDefault();
+                pocket4dDropzone.classList.add('drag-over');
+            };
+            pocket4dDropzone.ondragleave = () => {
+                pocket4dDropzone.classList.remove('drag-over');
+            };
+            pocket4dDropzone.ondrop = (e) => {
+                e.preventDefault();
+                pocket4dDropzone.classList.remove('drag-over');
+                if (currentDraggedItem && !levelCompleted) {
+                    const cardEl = document.getElementById(`item-${currentDraggedItem.id}`);
+                    if (cardEl && !cardEl.disabled) {
+                        processScannerItem(currentDraggedItem, cardEl);
+                    }
+                    currentDraggedItem = null;
+                }
+            };
+        }
+
+        function processScannerItem(item, cardEl) {
+            const lvl = levels[currentLevelIndex];
+            totalActions++;
+            showFeedbackContainer();
+
+            if (item.valid) {
+                playSound('blip');
+                setMascotMood('happy');
+                acceptedScannerCount++;
+                scannerCounter.textContent = `${acceptedScannerCount} / ${lvl.targetCount} Sah`;
+
+                // Tandakan kad telah dimasukkan ke Poket 4D
+                cardEl.disabled = true;
+                cardEl.draggable = false;
+                cardEl.className = 'bg-emerald-700/60 border-2 border-emerald-400 text-emerald-200 font-bold text-xs sm:text-sm p-2.5 rounded-xl opacity-60 cursor-default';
+                cardEl.textContent = `✅ ${item.label}`;
+
+                // Papar lencana dalam Poket 4D
+                const chip = document.createElement('span');
+                chip.className = 'bg-[#0093E9] text-white text-xs font-bold px-2.5 py-1 rounded-full shadow animate-pop';
+                chip.textContent = item.label;
+                acceptedItemsTray.appendChild(chip);
+
+                if (acceptedScannerCount >= lvl.targetCount) {
+                    // Semua 3 objek sah berjaya dikumpul!
+                    Array.from(draggableItemsPool.children).forEach(el => el.disabled = true);
+                    unlockAnywhereDoor("Syabas Ejen! Semua 3 alat istinjak yang suci, kering dan kesat berjaya dimasukkan ke dalam Poket 4D!");
+                } else {
+                    feedbackBox.className = 'rounded-2xl p-3 sm:p-3.5 border-2 border-cyan-400 bg-cyan-950/90 text-cyan-100 shadow-xl animate-pop';
+                    feedbackIcon.textContent = '🎒';
+                    feedbackTitle.textContent = `Objek Diterima (${acceptedScannerCount}/${lvl.targetCount})!`;
+                    feedbackTitle.className = 'font-title font-bold text-sm sm:text-base text-cyan-300';
+                    feedbackDesc.textContent = item.reason;
+                    nextBtn.classList.add('hidden');
+                }
+            } else {
+                // Objek tidak sah ditolak oleh Poket 4D
+                playSound('wrong');
+                setMascotMood('shocked');
+                deductScore();
+                cardEl.classList.add('animate-shake', 'border-rose-500', 'bg-rose-950/80');
+                setTimeout(() => cardEl.classList.remove('animate-shake'), 450);
+                showErrorFeedback(item.reason);
+            }
+        }
+
+        // Buka Pintu Ke Mana Saja (Anywhere Door)
+        function unlockAnywhereDoor(message) {
+            levelCompleted = true;
+            playSound('door_open');
+            setMascotMood('happy');
+
+            anywhereDoor.classList.add('open');
+            doorStatusText.textContent = 'Pintu Ke Mana Saja: TERBUKA!';
+            doorStatusText.className = 'mt-2 text-[11px] font-bold uppercase tracking-wider px-3 py-0.5 rounded-full bg-emerald-500/30 text-emerald-200 border border-emerald-400';
+
+            feedbackBox.className = 'rounded-2xl p-3 sm:p-4 border-2 border-[#FFD700] bg-emerald-950/95 text-emerald-100 shadow-xl animate-pop';
+            feedbackIcon.textContent = '🚪✨';
+            feedbackTitle.textContent = 'Pintu Ke Mana Saja Aktif!';
+            feedbackTitle.className = 'font-title font-bold text-sm sm:text-base text-[#FFD700]';
+            feedbackDesc.textContent = message;
+
+            nextBtn.classList.remove('hidden');
+            nextBtn.textContent = (currentLevelIndex === levels.length - 1) ? 'Terima Lencana Ejen 🏅' : 'Masuk Pintu Seterusnya 🚪➡️';
+        }
+
+        function showErrorFeedback(message) {
+            feedbackBox.className = 'rounded-2xl p-3 sm:p-4 border-2 border-amber-400 bg-amber-950/95 text-amber-100 shadow-xl animate-shake';
+            feedbackIcon.textContent = '⚠️';
+            feedbackTitle.textContent = 'Amaran Pengimbas! Cuba Lagi:';
+            feedbackTitle.className = 'font-title font-bold text-sm sm:text-base text-amber-300';
+            feedbackDesc.textContent = message;
+            nextBtn.classList.add('hidden');
+        }
+
+        function showFeedbackContainer() {
+            feedbackBox.classList.remove('hidden', 'animate-pop', 'animate-shake');
+            void feedbackBox.offsetWidth;
+        }
+
+        function deductScore() {
+            if (score > 60) {
+                score = Math.max(60, score - 5);
+                scoreDisplay.textContent = `${score}%`;
+            }
+        }
+
+        function nextLevel() {
+            currentLevelIndex++;
+            if (currentLevelIndex < levels.length) {
+                loadLevel(currentLevelIndex);
+            } else {
+                playSound('win');
+                screenGame.classList.add('hidden');
+                screenEnd.classList.remove('hidden');
+                document.getElementById('final-score').textContent = `${score}%`;
+                document.getElementById('final-attempts').textContent = `${totalActions} Kali`;
+            }
+        }
+
+        function restartGame() {
+            startGame();
+        }
+    </script>
+</body>
+</html>
